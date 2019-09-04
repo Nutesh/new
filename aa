@@ -1,1 +1,153 @@
-nnnn
+package com.cookingschool.pagefactory;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
+
+public class Recipe {
+
+	WebDriver driver;
+
+	@FindBy(how = How.NAME, name = "fname")
+	@CacheLookup
+	WebElement firstName;
+
+	@FindBy(how = How.NAME, name = "lname")
+	@CacheLookup
+	WebElement lastName;
+
+	@FindBy(how = How.NAME, using = "email")
+	@CacheLookup
+	WebElement email;
+
+	@FindBy(how = How.NAME, using = "mobile")
+	@CacheLookup
+	WebElement mobile;
+
+	@FindBy(how = How.NAME, using = "D6")
+	@CacheLookup
+	WebElement category;
+
+	@FindBy(how = How.NAME, using = "D5")
+	@CacheLookup
+	WebElement city;
+
+	
+	@FindBy(how = How.NAME, using = "D4")
+	@CacheLookup
+	WebElement mode;
+
+	@FindBy(xpath = "/html/body/form/table/tbody/tr[9]/td[2]/select")
+	@CacheLookup
+	WebElement duration;
+
+	@FindBy(how = How.NAME, using = "enqdetails")
+	@CacheLookup
+	WebElement enquiry;
+
+	@FindBy(how = How.ID, using = "Submit1")
+	@CacheLookup
+	WebElement enquireNow;
+
+	@FindBy(how = How.ID, using = "Submit2")
+	@CacheLookup
+	WebElement reset;
+	
+	public String getFirstName() {
+		return firstName.getAttribute("value");
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName.clear();
+		this.firstName.sendKeys(firstName);
+	}
+
+	public String getLastName() {
+		return lastName.getAttribute("value");
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName.clear();
+		this.lastName.sendKeys(lastName);
+	}
+
+	public String getEmail() {
+		return email.getAttribute("value");
+	}
+
+	public void setEmail(String email) {
+		this.email.clear();
+		this.email.sendKeys(email);
+	}
+
+	public String getMobile() {
+		return mobile.getAttribute("value");
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile.clear();
+		this.mobile.sendKeys(mobile);;
+	}
+
+	public String getCategory() {
+		return new Select(this.category).getFirstSelectedOption().getText();
+	}
+
+	public void setCategory(String category) {
+		Select select = new Select(this.category);
+		select.selectByVisibleText(category);
+	}
+
+	public String getCity() {
+		return new Select(this.city).getFirstSelectedOption().getText();
+	}
+
+	public void setCity(String city) {
+		Select select = new Select(this.city);
+		select.selectByVisibleText(city);
+	}
+
+	public String getMode() {
+		return new Select(this.mode).getFirstSelectedOption().getText();
+	}
+
+	public void setMode(String mode) {
+		Select select = new Select(this.mode);
+		select.selectByVisibleText(mode);
+	}
+
+	public String getDuration() {
+		return new Select(this.duration).getFirstSelectedOption().getText();
+	}
+
+	public void setDuration(String duration) {
+		Select select = new Select(this.duration);
+		select.selectByVisibleText(duration);
+	}
+
+	public String getEnquiry() {
+		return enquiry.getAttribute("value");
+	}
+
+	public void setEnquiry(WebElement enquiry) {
+		this.enquiry = enquiry;
+	}
+
+	public Recipe(WebDriver driver) {
+		super();
+		this.driver = driver;
+		
+	}
+	
+	public void clickEnquireNow() {
+		this.enquireNow.submit();
+	}
+	
+	public void clickReset() {
+		this.reset.submit();
+	}
+
+}
